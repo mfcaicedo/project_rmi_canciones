@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AdministradorNotificaciones/AdministradorNotificaciones.iml" filepath="$PROJECT_DIR$/AdministradorNotificaciones/AdministradorNotificaciones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cliente/Cliente.iml" filepath="$PROJECT_DIR$/Cliente/Cliente.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServidorDeCanciones/ServidorDeCanciones.iml" filepath="$PROJECT_DIR$/ServidorDeCanciones/ServidorDeCanciones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ServidorDeRespaldo/ServidorDeRespaldo.iml" filepath="$PROJECT_DIR$/ServidorDeRespaldo/ServidorDeRespaldo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/project_rmi_canciones.iml" filepath="$PROJECT_DIR$/.idea/project_rmi_canciones.iml" />
+    </modules>
+  </component>
+</project>
