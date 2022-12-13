@@ -6,6 +6,7 @@
 package servidor.servicios;
 
 
+import servidor.controladores.ControladorGestorRespaldoImpl;
 import servidor.controladores.ControladorGestorRespaldoInt;
 import servidor.utilidades.UtilidadesRegistroS;
 import servidor.utilidades.UtilidadesConsola;
@@ -27,11 +28,19 @@ public class ServidorDeObjetos {
         System.out.println("Cual es el número de puerto por el cual escucha el rmiregistry ");
         numPuertoRMIRegistry = servidor.utilidades.UtilidadesConsola.leerEntero();
 
-        objRemoto = (ControladorGestorRespaldoInt) UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto,direccionIpRMIRegistry,numPuertoRMIRegistry, "objServicioGestionAdministradores");
+        CancionRepository objRepository = new CancionRepository();
+        ControladorGestorRespaldoImpl objRemotoGestionRespaldo = new ControladorGestorRespaldoImpl(objRepository);
 
-        AdminitradorCallbackImpl objRemotoAdministrador = new AdminitradorCallbackImpl();
+        try
+        {
+            UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoGestionRespaldo, direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionRespaldo");
 
-        objRemoto.registrarReferenciaAdministrador(objRemotoAdministrador);
+        } catch (Exception e)
+        {
+            System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" +  e.getMessage());
+        }
+
 
     }
 }

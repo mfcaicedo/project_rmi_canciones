@@ -7,6 +7,8 @@ package servidor.servicios;
 
 
 import servidor.controladores.ControladorGestorRespaldoImpl;
+import servidor.controladores.ControladorGestorRespaldoInt;
+import servidor.utilidades.UtilidadesRegistroC;
 import servidor.utilidades.UtilidadesRegistroS;
 import servidor.utilidades.UtilidadesConsola;
 import java.rmi.RemoteException;
@@ -17,6 +19,9 @@ import servidor.controladores.ControladorGestorCancionesImpl;
 
 public class ServidorDeObjetos
 {
+
+    //creo el objeto remoto de la interfaz ControladorGestorRespaldoInt
+    private static ControladorGestorRespaldoInt objRemoto;
     public static void main(String args[]) throws RemoteException
     {        
          
@@ -30,17 +35,18 @@ public class ServidorDeObjetos
      
         CancionRepository objRepository = new CancionRepository();
         ControladorGestionAdministradoresImpl objRemotoGestionAdministradores = new ControladorGestionAdministradoresImpl();
-        ControladorGestorRespaldoImpl objRemoteGestionRespaldo = new ControladorGestorRespaldoImpl();
+        //consulto el objRemoto del servidor de respaldo
+        objRemoto = (ControladorGestorRespaldoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionRespaldo");
+
         ControladorGestorCancionesImpl objRemotoGestionCanciones = new ControladorGestorCancionesImpl(objRepository,
-                objRemotoGestionAdministradores, objRemoteGestionRespaldo);
-        
+                objRemotoGestionAdministradores, objRemoto);
+
         try
         {
            UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoGestionCanciones, direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionCanciones");
            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoGestionAdministradores, direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionAdministradores");
-           UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoteGestionRespaldo, direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionRespaldo");
-            
+
         } catch (Exception e)
         {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" +  e.getMessage());

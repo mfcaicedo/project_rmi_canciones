@@ -12,16 +12,17 @@ public class ControladorGestorCancionesImpl extends UnicastRemoteObject implemen
     
     private final CancionRepositoryInt objCancionesRepository;
     private final ControladorGestionAdministradoresImpl objReferenciaRemota;
-    private final ControladorGestorRespaldoImpl objReferenciaRemotaRespaldo;
+
+    private final ControladorGestorRespaldoInt objRemoto;
 
     public ControladorGestorCancionesImpl(CancionRepositoryInt objCancionesRepository,
                                           ControladorGestionAdministradoresImpl objReferenciaRemota,
-                                          ControladorGestorRespaldoImpl objReferenciaRemotaRespaldo) throws RemoteException
+                                          ControladorGestorRespaldoInt objRemoto) throws RemoteException
     {
         super(); //se asigna un puerto de escucha al OR
         this.objCancionesRepository = objCancionesRepository;
         this.objReferenciaRemota = objReferenciaRemota;
-        this.objReferenciaRemotaRespaldo = objReferenciaRemotaRespaldo;
+        this.objRemoto = objRemoto;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class ControladorGestorCancionesImpl extends UnicastRemoteObject implemen
         {
             bandera=true;
             //Enviar una copia de la cacion al servidor de respaldo
-            this.objReferenciaRemotaRespaldo.registrarCancionRespaldo(objCancion);
+            this.objRemoto.registrarCancionRespaldo(objCancion);
             //Envio notificacion
             this.objReferenciaRemota.notificarAdministradores(objCancion.getTitulo());
         }
