@@ -6,7 +6,6 @@
 package servidor.servicios;
 
 
-import servidor.controladores.ControladorGestorRespaldoImpl;
 import servidor.controladores.ControladorGestorRespaldoInt;
 import servidor.utilidades.UtilidadesRegistroC;
 import servidor.utilidades.UtilidadesRegistroS;
@@ -36,7 +35,7 @@ public class ServidorDeObjetos
         CancionRepository objRepository = new CancionRepository();
         ControladorGestionAdministradoresImpl objRemotoGestionAdministradores = new ControladorGestionAdministradoresImpl();
         //consulto el objRemoto del servidor de respaldo
-        objRemoto = (ControladorGestorRespaldoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, numPuertoRMIRegistry, "objServicioGestionRespaldo");
+        objRemoto = (ControladorGestorRespaldoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry, 2021, "objServicioGestionRespaldo");
 
         ControladorGestorCancionesImpl objRemotoGestionCanciones = new ControladorGestorCancionesImpl(objRepository,
                 objRemotoGestionAdministradores, objRemoto);
