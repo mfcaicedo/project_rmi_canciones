@@ -46,11 +46,11 @@ public class UtilidadesAudio {
         return objCancion;
     }
     
-    public  static byte[] obtenerBytesCancion()
+    public  static byte[] obtenerBytesCancion(String nombreCancion)
     {
         byte[] arrayBytesCancion=null;
         try {
-                File file=new File("cancion.mp3");
+                File file=new File(nombreCancion);
                 FileInputStream objFileInputStream = new FileInputStream(file);
                 BufferedInputStream objBuffer= new BufferedInputStream(objFileInputStream);
                 arrayBytesCancion = new byte[(int) file.length()];

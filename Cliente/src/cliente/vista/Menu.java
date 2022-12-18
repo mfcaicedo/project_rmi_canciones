@@ -48,7 +48,7 @@ public class Menu {
             System.out.println("Digite el nombre de la  canción: ");
             String nombreCancion = UtilidadesConsola.leerCadena();
             CancionDTO objCancion = UtilidadesAudio.leerMetadatos(nombreCancion);
-            byte[] arrayBytesCancion = UtilidadesAudio.obtenerBytesCancion();
+            byte[] arrayBytesCancion = UtilidadesAudio.obtenerBytesCancion(nombreCancion);
             objCancion.setArrayBytes(arrayBytesCancion);
 
             boolean valor = objRemoto.registrarCancion(objCancion);//invocación del método remoto

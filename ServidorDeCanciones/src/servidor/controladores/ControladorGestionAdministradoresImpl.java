@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import servidor.DTO.CancionDTO;
+import servidor.DTO.NotificacionDTO;
 
 public class ControladorGestionAdministradoresImpl extends UnicastRemoteObject implements ControladorGestionAdministradoresInt{
 
@@ -24,17 +25,14 @@ public class ControladorGestionAdministradoresImpl extends UnicastRemoteObject i
         this.referenciasAdministradores.add(objReferencia);
     }
     
-    public void notificarAdministradores(String mensaje)
+    public void notificarAdministradores(CancionDTO objCancion, NotificacionDTO objNotificacion)
     {
-        //for (AdministradorCallbackInt objReferencia : referenciasAdministradores) {
-        //    objReferencia.notificarRegistroDeNuevaCancion(mensaje); //se hace el callback
-        //}
-        
+        System.out.println("Notificando administradores");
         this.referenciasAdministradores.forEach(e->{
             try {
-                e.notificarRegistroDeNuevaCancion(mensaje);
+                e.notificarRegistroDeNuevaCancion(objCancion, objNotificacion);
             } catch (RemoteException ex) {
-                
+                System.out.println("error " + ex);
             }
         });
     }
